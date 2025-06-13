@@ -1,0 +1,18 @@
+fastapi
+uvicorn
+pyttsx3
+SpeechRecognition
+pyaudio
+httpx
+python-dotenv
+pydantic
+requests
+dateparser
+python-multipart
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+# pywin32
+# win32serviceutil
+# win32service
+# win32event
