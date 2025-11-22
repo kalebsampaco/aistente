@@ -2,6 +2,12 @@
 
 Esta guía te ayudará a generar certificados digitales simulados que emulan los emitidos por la Dirección General de Impuestos Internos (DGII) de República Dominicana para pruebas locales.
 
+## 💾 Almacenamiento Local
+
+**Los certificados se guardan en tu sistema de archivos local, NO en la nube ni en S3.**
+
+Todos los archivos generados (claves privadas, certificados, archivos .p12) se guardan en directorios locales que tú especifiques en tu computadora.
+
 ## ⚠️ IMPORTANTE
 
 **Estos certificados son ÚNICAMENTE para pruebas y desarrollo local. NO son válidos para:**
@@ -75,14 +81,14 @@ from app.services.dgii_certificate_simulator import DGIICertificateSimulator
 # Crear simulador
 simulator = DGIICertificateSimulator()
 
-# Generar certificado completo
+# Generar certificado completo en carpeta local
 files = simulator.generate_complete_certificate_set(
-    output_dir="/tmp/certificados",
-    rnc="131257681",                        # RNC del contribuyente
-    nombre_contribuyente="MI EMPRESA SRL",   # Nombre o razón social
-    email="contacto@miempresa.com.do",      # Email (opcional)
-    password="MiPassword123",                # Contraseña para proteger archivos
-    valid_days=365                           # Días de validez
+    output_dir="./certificados",              # ← Carpeta local en tu directorio actual
+    rnc="131257681",                          # RNC del contribuyente
+    nombre_contribuyente="MI EMPRESA SRL",     # Nombre o razón social
+    email="contacto@miempresa.com.do",        # Email (opcional)
+    password="MiPassword123",                  # Contraseña para proteger archivos
+    valid_days=365                             # Días de validez
 )
 
 print(f"✅ Certificado generado!")
@@ -100,9 +106,9 @@ from app.services.dgii_certificate_simulator import DGIICertificateSimulator
 
 simulator = DGIICertificateSimulator()
 
-# Generar certificado para una empresa
+# Generar certificado para una empresa - se guarda localmente
 files = simulator.generate_complete_certificate_set(
-    output_dir="/tmp/dgii_certs",
+    output_dir="./mis_certificados",        # ← Directorio local relativo
     rnc="131257681",
     nombre_contribuyente="EMPRESA DEMO SRL",
     email="info@empresademo.com.do",
@@ -110,7 +116,7 @@ files = simulator.generate_complete_certificate_set(
     valid_days=365
 )
 
-# Archivos generados:
+# Archivos generados en ./mis_certificados/:
 # - dgii_rnc_131257681_private.key (clave privada cifrada)
 # - dgii_rnc_131257681_cert.pem (certificado público)
 # - dgii_rnc_131257681.p12 (archivo PKCS#12 para importar)

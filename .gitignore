@@ -31,3 +31,10 @@ Thumbs.db
 # Temporary files
 /tmp/
 *.tmp
+
+# DGII Certificates (local testing only)
+certificados_dgii/
+certificados_dgii_batch/
+*.key
+*.p12
+*.pfx

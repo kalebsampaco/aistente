@@ -123,6 +123,8 @@ python scripts/test_s3.py
 
 El proyecto incluye un simulador completo de certificados digitales de la DGII (Dirección General de Impuestos Internos de República Dominicana).
 
+**💾 Los certificados se guardan localmente en tu sistema de archivos, NO en S3/nube.**
+
 ### Uso Rápido
 
 ```bash
@@ -138,9 +140,9 @@ from app.services.dgii_certificate_simulator import DGIICertificateSimulator
 # Crear simulador
 simulator = DGIICertificateSimulator()
 
-# Generar certificado completo
+# Generar certificado completo - se guarda localmente
 files = simulator.generate_complete_certificate_set(
-    output_dir="/tmp/certificados",
+    output_dir="./certificados",           # ← Carpeta local
     rnc="131257681",
     nombre_contribuyente="MI EMPRESA SRL",
     email="contacto@miempresa.com.do",

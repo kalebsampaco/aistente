@@ -35,7 +35,8 @@ def example_basic_certificate():
     simulator = DGIICertificateSimulator()
     
     # Configuración del certificado
-    output_dir = "/tmp/dgii_certificates"
+    # Guarda en un directorio local relativo al directorio actual
+    output_dir = "./certificados_dgii"
     rnc = "131257681"
     nombre = "EMPRESA DE PRUEBA SRL"
     email = "empresa@prueba.com.do"
@@ -52,7 +53,7 @@ def example_basic_certificate():
     )
     
     print("\n✅ Certificado generado exitosamente!")
-    print(f"\n📁 Archivos creados en: {output_dir}")
+    print(f"\n📁 Archivos guardados localmente en: {os.path.abspath(output_dir)}")
     print(f"   • Clave privada: {os.path.basename(files['private_key'])}")
     print(f"   • Certificado: {os.path.basename(files['certificate'])}")
     if files['pkcs12']:
@@ -63,6 +64,7 @@ def example_basic_certificate():
     print("   • Navegadores web (Chrome, Firefox, Edge)")
     print("   • Aplicaciones de correo")
     print("   • Software de firma digital")
+    print("\n📝 Nota: Los archivos se guardan en tu sistema de archivos local, NO en S3/nube")
     
     return files
 
@@ -129,10 +131,11 @@ def example_multiple_certificates():
         }
     ]
     
-    output_base = "/tmp/dgii_certificates_batch"
+    output_base = "./certificados_dgii_batch"
     password = "Batch2024"
     
     print(f"\n📦 Generando {len(contribuyentes)} certificados...")
+    print(f"📁 Guardando en carpeta local: {os.path.abspath(output_base)}")
     
     for contrib in contribuyentes:
         output_dir = os.path.join(output_base, f"rnc_{contrib['rnc']}")
