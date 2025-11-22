@@ -10,8 +10,13 @@ services:
       - .:/usr/src/app
     depends_on:
       - ollama
+      - minio
     environment:
       - OLLAMA_HOST=http://ollama:11434
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - AWS_ENDPOINT_URL=http://minio:9000
+      - AWS_DEFAULT_REGION=us-east-1
     restart: unless-stopped
 
   ollama:
@@ -23,5 +28,26 @@ services:
       - ollama_data:/root/.ollama
     restart: unless-stopped
 
+  # MinIO - S3 compatible storage for local testing
+  minio:
+    image: minio/minio:latest
+    container_name: minio-s3
+    ports:
+      - "9000:9000"      # API port
+      - "9001:9001"      # Console UI port
+    volumes:
+      - minio_data:/data
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
 volumes:
   ollama_data:
+  minio_data:
