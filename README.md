@@ -10,6 +10,7 @@ Un asistente virtual inteligente construido con Python que integra múltiples se
 - 📅 Gestión de calendario con Google Calendar
 - 📋 Sistema de tareas
 - ☁️ **Almacenamiento en S3** (local con MinIO o AWS S3)
+- 🏛️ **Simulador de Certificados DGII** (República Dominicana)
 
 ## 📋 Requisitos
 
@@ -118,11 +119,63 @@ Ejecuta el script de prueba incluido:
 python scripts/test_s3.py
 ```
 
+## 🏛️ Simulador de Certificados DGII
+
+El proyecto incluye un simulador completo de certificados digitales de la DGII (Dirección General de Impuestos Internos de República Dominicana).
+
+### Uso Rápido
+
+```bash
+# Script interactivo
+python scripts/simulate_dgii_certificate.py
+```
+
+### Ejemplo de Código
+
+```python
+from app.services.dgii_certificate_simulator import DGIICertificateSimulator
+
+# Crear simulador
+simulator = DGIICertificateSimulator()
+
+# Generar certificado completo
+files = simulator.generate_complete_certificate_set(
+    output_dir="/tmp/certificados",
+    rnc="131257681",
+    nombre_contribuyente="MI EMPRESA SRL",
+    email="contacto@miempresa.com.do",
+    password="MiPassword123",
+    valid_days=365
+)
+
+# Archivos generados:
+# - Clave privada (cifrada)
+# - Certificado X.509
+# - Archivo PKCS#12 (.p12) para importar en navegadores
+```
+
+### ⚠️ Importante
+
+Los certificados generados son **SOLO para pruebas y desarrollo local**. NO son válidos para:
+- Transacciones reales con la DGII
+- Facturación electrónica en producción
+- Declaraciones tributarias oficiales
+
+### Casos de Uso
+
+- 🧪 Desarrollo de aplicaciones de facturación electrónica
+- 🔒 Pruebas de firma digital
+- 🏗️ Validación de flujos de autenticación
+- 💻 Testing de aplicaciones tributarias
+
+Lee la [Guía Completa del Simulador DGII](docs/DGII_CERTIFICATE_SIMULATOR.md) para más información.
+
 ## 📚 Documentación
 
 - [🚀 Guía de Inicio Rápido](docs/QUICK_START.md) - Empieza en 5 minutos
 - [📖 Guía de Almacenamiento S3](docs/S3_LOCAL_TESTING.md) - Documentación completa
 - [🏗️ Arquitectura de la Solución](docs/ARCHITECTURE.md) - Cómo funciona todo
+- [🏛️ Simulador de Certificados DGII](docs/DGII_CERTIFICATE_SIMULATOR.md) - Certificados digitales para pruebas
 
 ## 🤝 Contribución
 

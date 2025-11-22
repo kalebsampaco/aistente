@@ -13,6 +13,7 @@ google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
 boto3
+cryptography>=42.0.4
 # pywin32
 # win32serviceutil
 # win32service
