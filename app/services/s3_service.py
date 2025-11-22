@@ -41,10 +41,25 @@ class S3Service:
             endpoint_url: URL del endpoint S3 (usa env var si no se provee, None para AWS real)
             region: Región de AWS
         """
-        self.access_key = access_key or os.getenv("AWS_ACCESS_KEY_ID", "minioadmin")
-        self.secret_key = secret_key or os.getenv("AWS_SECRET_ACCESS_KEY", "minioadmin")
+        self.access_key = access_key or os.getenv("AWS_ACCESS_KEY_ID")
+        self.secret_key = secret_key or os.getenv("AWS_SECRET_ACCESS_KEY")
         self.endpoint_url = endpoint_url or os.getenv("AWS_ENDPOINT_URL")
         self.region = region or os.getenv("AWS_DEFAULT_REGION", "us-east-1")
+        
+        # Validar que se proporcionaron credenciales
+        if not self.access_key or not self.secret_key:
+            raise ValueError(
+                "Se requieren credenciales de AWS. "
+                "Configura AWS_ACCESS_KEY_ID y AWS_SECRET_ACCESS_KEY en las variables de entorno "
+                "o pásalas como parámetros al constructor."
+            )
+        
+        # Advertencia si se usan credenciales por defecto de MinIO
+        if self.access_key == "minioadmin" or self.secret_key == "minioadmin":
+            logger.warning(
+                "⚠️  Usando credenciales por defecto de MinIO. "
+                "Esto es aceptable para desarrollo local, pero NO para producción."
+            )
         
         # Crear cliente S3
         self.s3_client = boto3.client(
