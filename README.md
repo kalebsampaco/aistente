@@ -72,6 +72,10 @@ Variables disponibles:
 
 El proyecto incluye soporte completo para almacenamiento de objetos compatible con S3.
 
+### 🚀 Inicio Rápido
+
+¿Quieres empezar ya? Lee la [Guía de Inicio Rápido](docs/QUICK_START.md) (5 minutos).
+
 ### Uso Local con MinIO
 
 MinIO viene preconfigurado y se inicia automáticamente con Docker Compose:
@@ -116,7 +120,8 @@ python scripts/test_s3.py
 
 ## 📚 Documentación
 
-- [Guía de Almacenamiento S3](docs/S3_LOCAL_TESTING.md)
+- [🚀 Guía de Inicio Rápido](docs/QUICK_START.md) - Empieza en 5 minutos
+- [📖 Guía de Almacenamiento S3](docs/S3_LOCAL_TESTING.md) - Documentación completa
 
 ## 🤝 Contribución
 
