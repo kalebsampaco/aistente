@@ -122,6 +122,7 @@ python scripts/test_s3.py
 
 - [🚀 Guía de Inicio Rápido](docs/QUICK_START.md) - Empieza en 5 minutos
 - [📖 Guía de Almacenamiento S3](docs/S3_LOCAL_TESTING.md) - Documentación completa
+- [🏗️ Arquitectura de la Solución](docs/ARCHITECTURE.md) - Cómo funciona todo
 
 ## 🤝 Contribución
 
